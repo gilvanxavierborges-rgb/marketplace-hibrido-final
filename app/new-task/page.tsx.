@@ -1,0 +1,8 @@
+export default function TestePage() {
+  return (
+    <div>
+      <h1>Página de Teste Funcionando!</h1>
+      <p>Se você consegue ver este texto, a página está sendo compilada corretamente.</p>
+    </div>
+  );
+}
