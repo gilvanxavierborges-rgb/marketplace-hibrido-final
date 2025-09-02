@@ -8,14 +8,19 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export async function GET() {
   try {
-const { data: tasks, error } = await supabase.from('tarefas').select('*');
+    console.log("Tentando buscar dados da tabela 'tarefas'...");
+    const { data: tasks, error } = await supabase.from('tarefas').select('*');
+
     if (error) {
+      console.error('Erro retornado pelo Supabase:', error);
       return NextResponse.json({ error: 'Erro ao buscar tarefas.' }, { status: 500 });
     }
 
+    console.log("Dados de tarefas encontrados:", tasks);
     return NextResponse.json({ tasks });
 
   } catch (err) {
+    console.error('Ocorreu um erro desconhecido no servidor:', err);
     return NextResponse.json({ error: 'Ocorreu um erro desconhecido.' }, { status: 500 });
   }
 }
