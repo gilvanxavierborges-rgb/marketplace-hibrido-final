@@ -8,8 +8,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export async function GET() {
   try {
-    const { data: tasks, error } = await supabase.from('tasks').select('*');
-
+const { data: tasks, error } = await supabase.from('tarefas').select('*');
     if (error) {
       return NextResponse.json({ error: 'Erro ao buscar tarefas.' }, { status: 500 });
     }
