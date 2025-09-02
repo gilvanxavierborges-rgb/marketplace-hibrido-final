@@ -1,26 +1,16 @@
-import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export async function GET() {
   try {
-    console.log("Tentando buscar dados da tabela 'tarefas'...");
-    const { data: tasks, error } = await supabase.from('tarefas').select('*');
-
-    if (error) {
-      console.error('Erro retornado pelo Supabase:', error);
-      return NextResponse.json({ error: 'Erro ao buscar tarefas.' }, { status: 500 });
-    }
-
-    console.log("Dados de tarefas encontrados:", tasks);
+    const tasks = [
+      { id: 1, titulo: 'Tarefa de Teste 1', descricao: 'Descrição de teste.', categoria: 'hidraulica' },
+      { id: 2, titulo: 'Tarefa de Teste 2', descricao: 'Outra descrição de teste.', categoria: 'eletrica' },
+    ];
+    console.log("Rota de API funcionando! Retornando dados de teste.");
     return NextResponse.json({ tasks });
 
   } catch (err) {
-    console.error('Ocorreu um erro desconhecido no servidor:', err);
-    return NextResponse.json({ error: 'Ocorreu um erro desconhecido.' }, { status: 500 });
+    console.error('Erro de teste:', err);
+    return NextResponse.json({ error: 'Erro ao buscar tarefas.' }, { status: 500 });
   }
 }
